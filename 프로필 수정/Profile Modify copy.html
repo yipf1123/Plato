@@ -1,0 +1,217 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+   pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Sign Up</title>
+<style>
+.final-touch {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   min-width: 885px;
+}
+
+.box, .signup-image {
+   display: inline-block;
+}
+
+.box {
+   position: absolute;
+}
+
+.signup-image {
+   position: relative;
+   z-index: 100;
+   border-radius: 15px;
+   height: 592px;
+   width: auto;
+   top: 110px;
+}
+
+.signup-container {
+   top: 110px;
+   width: 400px;
+   height: 550px;
+   margin: 0 auto;
+   padding: 20px;
+   border: 1px solid #ccc;
+   border-radius: 15px;
+   position: relative;
+   z-index: 100;
+   background-color: #fff;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   right: 223px;
+}
+
+.logo {
+   display: block;
+   margin: 0 auto;
+   max-height: 100px;
+   width: auto;
+   margin-bottom: 8px;
+}
+
+.signup-button {
+   background-color: black;
+   color: white;
+   border: none;
+   border-radius: 3px;
+   cursor: pointer;
+   height: 36px;
+   width: 100%;
+   margin-top: 15px;
+   margin-bottom: 12px;
+   border-radius: 10px;
+}
+
+.duplicate-check-button {
+   display: inline-block;
+   height: 36px;
+   padding: 5px 10px;
+   background-color: black;
+   color: white;
+   border: none;
+   border-radius: 3px;
+   cursor: pointer;
+   border-radius: 10px;
+}
+
+.overlay {
+   position: fixed;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   background-color: rgba(0, 0, 0, 0.7);
+   display: none;
+   z-index: 999;
+}
+
+a {
+   margin-top: 5px;
+   margin-bottom: 0.3px;
+}
+
+#id, #nickname {
+   width: 70%;
+   margin-right: 3px;
+}
+
+#password, #password-check, #email {
+   width: calc(100% - 10px);
+}
+
+select#gender, select#age {
+   width: 100%;
+}
+
+.age-box {
+   float: right;
+   clear: right;
+}
+
+.gender-box, .age-box {
+   display: inline-block;
+   width: calc(50% - 10px);
+}
+
+select, input {
+   margin-bottom: 8px;
+}
+
+#id, #nickname, #password, #password-check, #email, select#gender,
+   select#age {
+   height: 30px;
+   border-radius: 10px;
+   border: 1px solid #ccc;
+}
+
+a, .duplicate-check-button, .signup-button, select {
+   font-size: 12px;
+}
+</style>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function() {
+    $('.signup-button').click(function() {
+        $('.signup-container').fadeIn();
+        $('.signup-image').fadeIn();
+        $('.overlay').fadeIn();
+        $('.signup-container').css('z-index', '10000');
+        $('.signup-image').css('z-index', '1000');
+    });
+    
+    $('.overlay').click(function() {
+        $('.signup-container').fadeOut();
+        $('.overlay').fadeOut();
+        $('.signup-container').css('z-index', 'initial');
+        $('.signup-image').fadeOut(); // Add this line to hide the image
+        $('.signup-image').css('z-index', 'initial');
+    });
+
+    $('.signup-container').hide();
+    $('.signup-image').hide();
+});
+
+</script>
+
+</head>
+<body>
+   <button type="button" class="signup-button">회원가입</button>
+   <div class="final-touch">
+      <div class="box">
+         <div class="signup-container">
+            <img src="./img/logo2.png" class="logo">
+            <form method="POST" action="/signup">
+               <div class="container">
+                  <a class="id-text">아이디</a> <br> <input type="text" id="id"
+                     name="id" required>
+                  <button type="button" class="duplicate-check-button">중복
+                     확인</button>
+
+                  <a class="nickname-text">별명</a> <br> <input type="text"
+                     id="nickname" name="nickname" required>
+                  <button type="button" class="duplicate-check-button">중복
+                     확인</button>
+
+                  <a class="password-text">비밀번호</a> <br> <input type="password"
+                     id="password" name="password" required> <a
+                     class="password-check-text">비밀번호 확인</a> <br> <input
+                     type="password" id="password-check" name="password-check"
+                     required> <a class="email-text">이메일</a> <br> <input
+                     type="email" id="email" name="email" required>
+                  <div class="gender-box">
+                     <a class="gender-text">성별</a> <br> <select id="gender"
+                        name="gender">
+                        <option value="">성별</option>
+                        <option value="male">여성</option>
+                        <option value="female">남성</option>
+                     </select>
+                  </div>
+                  <div class="age-box">
+                     <a class="age-text">연령대</a> <br> <select id="age" name="age">
+                        <option value="">연령대</option>
+                        <option value="10s">10대</option>
+                        <option value="20s">20대</option>
+                        <option value="30s">30대</option>
+                        <option value="40s">40대</option>
+                        <option value="50s">50대</option>
+                        <option value="60s">60대 이상</option>
+                     </select>
+                  </div>
+               </div>
+               <button type="submit" class="signup-button">가입하기</button>
+            </form>
+         </div>
+      </div>
+      <img src="./img/signup-image.jpg" alt="Signup Image"
+         class="signup-image">
+   </div>
+   <div class="overlay"></div>
+</body>
+</html>
